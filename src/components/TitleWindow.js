@@ -18,6 +18,8 @@ const TitleWindow = (props) => {
 }
 
 
+
+
 const styles = StyleSheet.create({
     TitleContainer: {
         backgroundColor: '#252525',
@@ -30,6 +32,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flex: 2,
     },
+   
+    
+
     TitleTextFormat: {
         color: 'white',
         fontFamily:(Platform.OS==='android')? 'Roboto': 'System',
@@ -38,4 +43,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default TitleWindow;
+export default TitleWindow
