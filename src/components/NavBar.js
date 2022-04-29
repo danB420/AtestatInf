@@ -8,11 +8,10 @@ const NavigationBar= (props)=>{
     return(
             <View style={styles.navBar}>
               <CustomBTN
-             
               onPress={null}
               btnTitle={"foodLog"}/>
+
               <CustomBTN
-              
               onPress={null}
               btnTitle={"home"}/>
 

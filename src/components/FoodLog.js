@@ -1,24 +1,19 @@
-import {React,useState} from 'react';
+import {React,useState,useEffect} from 'react';
 import { ScrollView,View,Text,SafeAreaView,FlatList,StyleSheet,ImageBackground,TextInput } from 'react-native';
-
 import TitleWindow from './TitleWindow';
 import NavigationBar from './NavBar';
 import CustomBTN from './CustomButton';
-import { styleProps } from 'react-native-web/dist/cjs/modules/forwardedProps';
-
-
-
-
+import * as foodDB from './fooddb.json';
 const calories= 1250;
+
+const json_uri='';
 
 
 
 export default function FoodLogScreen(){
 
     const [globalID,setID]=useState(0)
-    const [foodData,setFoodData]= useState([
-       
-    ])
+    const [foodData,setFoodData]= useState([])
     const [foodItem,setFoodItem]=useState()
     
     const handleAddItem=()=>{
@@ -38,6 +33,28 @@ export default function FoodLogScreen(){
         
     }
 
+    const queryDB=(foodName)=>{
+        let i=0;
+        let foodId=-1;
+        
+        while(i<=foodDB.foods.length)
+        {
+            
+            if(foodDB.foods[i].name.localeCompare(foodName)==0)
+            {
+                console.log(foodDB.foods[i].name);
+                console.log(foodDB.foods[i].protein);
+                console.log(foodDB.foods[i].carbs);
+                console.log(foodDB.foods[i].fat);
+                return foodId;
+            }
+            i=i+1;
+                
+        
+        }
+    }
+
+    
     return(
         
         
@@ -45,6 +62,11 @@ export default function FoodLogScreen(){
             <View style={styles.flatBar}>
                 <Text style={styles.flatBarText}>Today's Log</Text>
             </View>
+            <CustomBTN
+            btnColor={'#252525'}
+            btnTitle={"getData"}
+            onPress={()=>{queryDB("mango")}}
+            />
             <FlatList
             keyExtractor={(item)=>item.id}
             data={foodData}
@@ -85,8 +107,6 @@ const styles= StyleSheet.create({
         backgroundColor:'#252525',
         padding:'3%',
         borderRadius:10,
-      
-
     },
     itemText:{
         color: 'white',
@@ -97,7 +117,6 @@ const styles= StyleSheet.create({
     flatBar:{
             backgroundColor:'#252525',
             flexDirection:'row',
-            
             height:'15%',
             padding:'2%',
             marginTop:'8%',
