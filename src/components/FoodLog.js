@@ -6,7 +6,16 @@ import CustomBTN from './CustomButton';
 import * as foodDB from './fooddb.json';
 const calories= 1250;
 
-const json_uri='';
+const params ={
+    api_key:'0xRY1mZ5dPHFL9W5ZQupcw8rWK2a4uuNyJgbQTLk',
+    query: 'cheddar cheese',
+    dataType:["Survey (FNDDS)"],
+    pagesize:5,
+}
+
+const api_url = `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${encodeURIComponent(params.api_key)}&query=${encodeURIComponent(params.query)}&dataType=${encodeURIComponent(params.dataType)}&pageSize=${encodeURIComponent(params.pagesize)}`
+
+
 
 
 
@@ -15,7 +24,14 @@ export default function FoodLogScreen(){
     const [globalID,setID]=useState(0)
     const [foodData,setFoodData]= useState([])
     const [foodItem,setFoodItem]=useState()
+    const [apiData,setApiData]=useState([])
     
+    
+    useEffect(()=>{
+        fetch(api_url).then(response =>response.json()).then(data=>setApiData(data)).catch(erorr =>console.log(erorr));
+        
+    },[])
+    console.log(apiData)
     const handleAddItem=()=>{
         
         if(foodItem===null || foodItem===undefined)
@@ -33,6 +49,7 @@ export default function FoodLogScreen(){
         
     }
 
+    /*Search functionality within local json*/
     const queryDB=(foodName)=>{
         let i=0;
         let foodId=-1;
@@ -53,6 +70,7 @@ export default function FoodLogScreen(){
         
         }
     }
+    
 
     
     return(
