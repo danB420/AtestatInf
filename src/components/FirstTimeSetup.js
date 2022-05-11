@@ -10,9 +10,11 @@ import {
   Keyboard,
   StatusBar,
   SafeAreaView,
-  Platform
+  Platform,
+  FlatList
 } from 'react-native';
-
+import { AntDesign } from '@expo/vector-icons'
+import SimpleSelectButton from 'react-native-simple-select-button'
 import TitleWindow from "./TitleWindow";
 import CustomBTN from './CustomButton';
 
@@ -64,8 +66,15 @@ export default function FirstTimeSetupScreen() {
   const [age, setAge] = useState('n/a');
   const [weight, setWeight] = useState('n/a');
   const [height, setHeight] = useState('n/a');
-  const [goal, setGoal] = useState('n/a');
+  const [choice,setChoice]=useState('n/a');
+  
 
+  const button_list = [
+    { label: "Male", value: "1" },
+    { label: "Female", value: "2" },
+   
+    
+  ];
 
   return (
     <TouchableWithoutFeedback onPress={() => {
@@ -124,28 +133,32 @@ export default function FirstTimeSetupScreen() {
           />
         </View>
 
+        <FlatList
+          style={{flexDirection:'row',marginTop:'5%',marginHorizontal:'5%'}}
+          contentContainerStyle={styles.genderSelectWrapper}
+          data={button_list}
+          keyExtractor={item => item.value}
+          extraData={choice}
+          renderItem={
+            ({ item }) => 
+              <SimpleSelectButton
+                onPress={() => setChoice(item.value)}
+                isChecked={choice === item.value}
+                text={item.label}
+                textSize={14}
+                iconName="checkcircleo"
+                iconColor="#fff"
+                iconSize={14}
+                buttonDefaultColor="#e7e7e7"
+                buttonSelectedColor="#252525"
+                textDefaultColor="black"
+                textSelectedColor="white"
+                style={styles.selectButton}
+                />
+          }
+          />
 
 
-        <TitleWindow
-
-          titleText={"What is your goal?"} />
-        <View style={[{ flexDirection: 'row', flex: 2, marginBottom: '5%', marginLeft: '2%', marginRight: '2%' }]}>
-          <CustomBTN
-            btnColor={defaultButtonColor}
-            onPress={() => { setGoal('lose-weight') }}
-            btnTitle="Lose Weight"
-          />
-          <CustomBTN
-            btnColor={defaultButtonColor}
-            onPress={() => { setGoal('stay-fit'); console.log("goal set"); }}
-            btnTitle="Stay Fit"
-          />
-          <CustomBTN
-            btnColor={defaultButtonColor}
-            onPress={() => { setGoal('get-big') }}
-            btnTitle="Get Big"
-          />
-        </View>
 
         <View style={styles.nextButton}>
           <CustomBTN
@@ -181,8 +194,11 @@ const styles = StyleSheet.create({
 
   },
   inputFormText: {
-    flex: 1,
+    width:'100%',
     color: 'white',
+    textAlign:'center',
+    height:'100%',
+    justifyContent:'center',
   },
   nextButton: {
     flex: 2,
@@ -190,5 +206,18 @@ const styles = StyleSheet.create({
     marginBottom: '5%',
     justifyContent: 'center',
     alignSelf: 'center',
+   
+  },
+  genderSelectWrapper:{
+    flex:1,
+    flexDirection:'row',
+   justifyContent:'center',
+    marginTop:'2%'
+
+  },
+  selectButton:{
+      borderRadius:15,
+      
+      
   }
 })
