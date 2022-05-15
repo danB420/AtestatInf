@@ -17,6 +17,7 @@ import { AntDesign } from '@expo/vector-icons'
 import SimpleSelectButton from 'react-native-simple-select-button'
 import TitleWindow from "./TitleWindow";
 import CustomBTN from './CustomButton';
+import FirstTimeSetupScreen2 from './FirstTimeSetup2';
 
 
 
@@ -68,7 +69,7 @@ export default function FirstTimeSetupScreen() {
   const [height, setHeight] = useState('n/a');
   const [choice,setChoice]=useState('n/a');
   
-
+  
   const button_list = [
     { label: "Male", value: "1" },
     { label: "Female", value: "2" },
@@ -123,7 +124,7 @@ export default function FirstTimeSetupScreen() {
         </View>
 
 
-        <View style={styles.inputFormContainer}>
+        <View style={[{marginBottom:0},styles.inputFormContainer]}>
           <TextInput
             style={styles.inputFormText}
             placeholder="Height"
@@ -187,7 +188,7 @@ const styles = StyleSheet.create({
     height: '15%',
     borderRadius: 10,
     alignSelf: 'center',
-    margin: '2%',
+    marginVertical: '2%',
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,

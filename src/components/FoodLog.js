@@ -3,6 +3,7 @@ import { ScrollView, View, Text, SafeAreaView, FlatList, StyleSheet, ImageBackgr
 import TitleWindow from './TitleWindow';
 import NavigationBar from './NavBar';
 import CustomBTN from './CustomButton';
+import FirstTimeSetupScreen from './FirstTimeSetup';
 const calories = 1250;
 
 console.disableYellowBox=true;
@@ -119,12 +120,7 @@ export default function FoodLogScreen() {
 
             </View>
 
-            <CustomBTN
-
-                btnColor='#ff0000'
-                onPress={parseQueryData}
-                btnTitle="Get Started!"
-            />
+            
             <View style={styles.caloriesLeft}>
                 <Text style={styles.flatBarText}>Calories left: {calories}</Text>
             </View>
