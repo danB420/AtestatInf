@@ -17,7 +17,7 @@ import { AntDesign } from '@expo/vector-icons'
 import SimpleSelectButton from 'react-native-simple-select-button'
 import TitleWindow from "./TitleWindow";
 import CustomBTN from './CustomButton';
-import FirstTimeSetupScreen2 from './FirstTimeSetup2';
+
 
 
 

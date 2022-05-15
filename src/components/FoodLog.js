@@ -16,9 +16,9 @@ var dKey =0;
 export default function FoodLogScreen() {
     const params = {
         api_key: '0xRY1mZ5dPHFL9W5ZQupcw8rWK2a4uuNyJgbQTLk',
-        query: 'banana',
-        dataType: ["Survey (FNDDS)"],
-        pagesize: 20,
+        query: 'cheeseburger',
+        dataType: ["Branded"],
+        pagesize: 5,
     }
     
     const api_url = `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${encodeURIComponent(params.api_key)}&query=${encodeURIComponent(params.query)}&dataType=${encodeURIComponent(params.dataType)}&pageSize=${encodeURIComponent(params.pagesize)}`
@@ -27,17 +27,27 @@ export default function FoodLogScreen() {
     const [globalID, setID] = useState(0)
     const [foodData, setFoodData] = useState([])
     const [foodItem, setFoodItem] = useState()
-    const [apiData, setApiData] = useState()
+    const [apiData, setApiData] = useState([])
 
+    
     /*Fetching data from FDC API*/
     useEffect(() => {
         fetch(api_url).then(response => response.json()).then(data => setApiData(data.foods)).catch(erorr => console.log(erorr));
-
+        for (let i = 0; i < apiData.length; i++) {
+            console.log(apiData[i].brandName+ " "+apiData[i].description);
+            console.log("Protein:" +apiData[i].foodNutrients[0].value+ " g");
+            console.log("Fat:" +apiData[i].foodNutrients[1].value+ " g");
+            console.log("Carbohydrates:" +apiData[i].foodNutrients[2].value + "g");
+            console.log("KCAL:" +apiData[i].foodNutrients[3].value+ "KCAL/100g");
+            console.log("=====")
+            
+        }
     }, [])
     /* automatically fetches once parameter changes */
     const parseQueryData = () => {
         for (let i = 0; i < apiData.length; i++) {
-            console.log(apiData[i].fdcId);
+            console.log(apiData[i].brandName);
+            console.log(apiData[i].foodNutrients[1].value)
         }
     }
 

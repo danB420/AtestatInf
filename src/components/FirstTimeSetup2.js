@@ -18,7 +18,7 @@ import SimpleSelectButton from 'react-native-simple-select-button'
 import TitleWindow from "./TitleWindow";
 import CustomBTN from './CustomButton';
 import Slider from '@react-native-community/slider';
-import {FirstTimeSetupScreen} from './FirstTimeSetup';
+
 import { Children } from 'react/cjs/react.production.min';
 
 
